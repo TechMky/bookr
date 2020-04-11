@@ -1,4 +1,6 @@
 import { app, BrowserWindow } from 'electron';
+const windowStateKeeper = require('electron-window-state');
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -9,11 +11,19 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 console.log(MAIN_WINDOW_WEBPACK_ENTRY)
 
 const createWindow = () => {
+  //remember window state
+  const windowState = windowStateKeeper({
+    defaultWidth: 400, defaultHeight: 600
+  });
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 400,
+    x: windowState.x,
+    y: windowState.y,
+    height: windowState.height,
+    width: windowState.width
   });
+
+  windowState.manage(mainWindow);
 
   console.log(MAIN_WINDOW_WEBPACK_ENTRY)
   // and load the index.html of the app.
