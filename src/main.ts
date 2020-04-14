@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 const windowStateKeeper = require('electron-window-state');
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
@@ -8,8 +8,13 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-console.log(MAIN_WINDOW_WEBPACK_ENTRY)
-
+ipcMain.on('new-item', (e, itemUrl) => {
+  
+  setTimeout(() => {
+    e.sender.send('new-item-success', 'Item Created');
+  }, 3000)
+  
+})
 const createWindow = () => {
   //remember window state
   const windowState = windowStateKeeper({
@@ -17,6 +22,9 @@ const createWindow = () => {
   });
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
     x: windowState.x,
     y: windowState.y,
     height: windowState.height,
