@@ -9,6 +9,7 @@ const modalWindow: HTMLElement = document.getElementById('modal');
 const inputUrl: HTMLInputElement = <HTMLInputElement>document.getElementById('url');
 const addItemButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add-item');
 const itemsContainer: HTMLDivElement = <HTMLDivElement> document.getElementById('items');
+const searchBar: HTMLInputElement = <HTMLInputElement> document.getElementById('search');
 
 document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
@@ -30,6 +31,19 @@ const toggleAddItemButton = () => {
         closeModal.style.display = 'none';
     }
 }
+
+searchBar.addEventListener('keyup', e => {
+    const searchQuery = searchBar.value;
+    const itemsArray: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.item'))
+
+    itemsArray.forEach(item => {
+        
+        const hasMatch: boolean = item.innerText.toLowerCase().includes(searchQuery)
+
+        item.style.display = hasMatch ? 'flex': 'none'
+
+    })
+})
 
 showModal.addEventListener('click', e => {
     modalWindow.style.display = 'flex';
