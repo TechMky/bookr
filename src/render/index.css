@@ -97,3 +97,18 @@ main {
 #add-item {
   margin-left: 25px;
 }
+
+.item {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  border-bottom: lightgray 2px solid;
+  background: #FAFAFA;
+  padding: 10px;
+}
+
+.item img {
+  width: 20%;
+  margin-right: 25px;
+  object-fit: cover;
+}

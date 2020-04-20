@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { fetchItem, Item } from './utils/fetchItem';
+import { Item } from './render/item.interface';
+const ItemHandler = require('./render/item')
+
 const windowStateKeeper = require('electron-window-state');
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
@@ -9,11 +11,11 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-ipcMain.on('new-item', async (e, itemUrl) => {
-  
-  const item: Item = await fetchItem(itemUrl);
+ipcMain.on('new-item', async (e: Electron.IpcMainEvent, itemUrl: string) => {
+
+  const item: Item = await ItemHandler.fetchItem(itemUrl);
   e.sender.send('new-item-success', item);
-  
+
 })
 const createWindow = () => {
   //remember window state
@@ -28,7 +30,9 @@ const createWindow = () => {
     x: windowState.x,
     y: windowState.y,
     height: windowState.height,
-    width: windowState.width
+    width: windowState.width,
+    minHeight: 600,
+    minWidth: 400
   });
 
   windowState.manage(mainWindow);
