@@ -51,7 +51,7 @@ exports.getItemHTML = function (item:Item) : HTMLElement{
 
     itemHtmlNode.classList.add('item')
 
-    itemHtmlNode.innerHTML = `<img src="${item.screenshot}"><h3>${item.title}</h3>`
+    itemHtmlNode.innerHTML = `<img src="${item.screenshot}" class="pointer-none"><h3 class="pointer-none">${item.title}</h3>`
 
     return itemHtmlNode;
 }
@@ -63,3 +63,30 @@ exports.loadItems = function (container: HTMLElement){
     })
 }
 
+
+
+exports.handleItemClick = function (e: MouseEvent) {
+
+    const target = <Element> e.target
+
+    if (target && target.matches('.item')) {
+
+        document.querySelectorAll('.items .selected')[0].classList.remove('selected')   
+        target.classList.add('selected')
+    }
+
+}
+
+exports.selectItem = function (direction: string) {
+
+    const currentItem: any = <Element> document.getElementsByClassName('item selected')[0]
+
+    if (direction === 'ArrowUp' && currentItem.previousSibling) {
+        currentItem.classList.remove('selected');
+        currentItem.previousSibling.classList.add('selected');
+    }else if (direction === 'ArrowDown' && currentItem.nextSibling){
+        currentItem.classList.remove('selected');
+        currentItem.nextSibling.classList.add('selected');
+    }
+
+}

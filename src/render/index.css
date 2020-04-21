@@ -105,6 +105,16 @@ main {
   border-bottom: lightgray 2px solid;
   background: #FAFAFA;
   padding: 10px;
+  border-left: 8px solid lightgray;
+}
+
+.item.selected{
+  border-left: 8px solid dodgerblue;
+  border-bottom: 2px solid  dodgerblue;
+}
+
+.pointer-none{
+  pointer-events: none;
 }
 
 .item img {

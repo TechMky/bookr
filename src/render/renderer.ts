@@ -14,6 +14,10 @@ const searchBar: HTMLInputElement = <HTMLInputElement> document.getElementById('
 document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
         ItemHandler.loadItems(itemsContainer);
+
+        if (ItemHandler.storedItems.length > 0) {
+            document.querySelectorAll('.item')[0].classList.add('selected')
+        }
     }
 })
 
@@ -43,6 +47,14 @@ searchBar.addEventListener('keyup', e => {
         item.style.display = hasMatch ? 'flex': 'none'
 
     })
+})
+
+itemsContainer.addEventListener('click', ItemHandler.handleItemClick)
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        ItemHandler.selectItem(e.key)
+    }
 })
 
 showModal.addEventListener('click', e => {
