@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { Item } from './render/item.interface';
-const ItemHandler = require('./render/item')
+import { fetchItem } from './render/item';
 
 const windowStateKeeper = require('electron-window-state');
 
@@ -13,7 +13,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 ipcMain.on('new-item', async (e: Electron.IpcMainEvent, itemUrl: string) => {
 
-  const item: Item = await ItemHandler.fetchItem(itemUrl);
+  const item: Item = await fetchItem(itemUrl);
   e.sender.send('new-item-success', item);
 
 })

@@ -1,11 +1,10 @@
-import { BrowserWindow, NativeImage } from "electron";
+import { BrowserWindow, NativeImage, dialog } from "electron";
 import { Item } from "./item.interface";
 let offScreenWindow: BrowserWindow = null;
 const STORED_ITEMS_KEY: string = 'stored-items'
-exports.storedItems = []
+export const storedItems:Array<Item> = []
 
-exports.fetchItem = async function (itemUrl: string){
-
+export async function fetchItem (itemUrl: string): Promise<Item>{
     offScreenWindow = new BrowserWindow({
         width: 500,
         height: 500,
@@ -34,7 +33,7 @@ exports.fetchItem = async function (itemUrl: string){
 }
 
 //add item to DOM
-exports.addItem = function (newItem:Item, container: HTMLElement, isNewItem: Boolean = false) {
+export function addItem (newItem:Item, container: HTMLElement, isNewItem: Boolean = false) {
     
     
     container.appendChild(this.getItemHTML(newItem));
@@ -46,7 +45,7 @@ exports.addItem = function (newItem:Item, container: HTMLElement, isNewItem: Boo
     }
 }
 
-exports.getItemHTML = function (item:Item) : HTMLElement{
+export function getItemHTML (item:Item) : HTMLElement{
     const itemHtmlNode: HTMLDivElement = document.createElement('div')
 
     itemHtmlNode.classList.add('item')
@@ -56,7 +55,7 @@ exports.getItemHTML = function (item:Item) : HTMLElement{
     return itemHtmlNode;
 }
 
-exports.loadItems = function (container: HTMLElement){
+export function loadItems (container: HTMLElement){
     this.storedItems = JSON.parse(localStorage.getItem(STORED_ITEMS_KEY))
     this.storedItems.forEach((item: Item) => {
         container.appendChild(this.getItemHTML(item))
@@ -65,7 +64,7 @@ exports.loadItems = function (container: HTMLElement){
 
 
 
-exports.handleItemClick = function (e: MouseEvent) {
+export function handleItemClick (e: MouseEvent) {
 
     const target = <Element> e.target
 
@@ -77,7 +76,7 @@ exports.handleItemClick = function (e: MouseEvent) {
 
 }
 
-exports.selectItem = function (direction: string) {
+export function selectItem (direction: string) {
 
     const currentItem: any = <Element> document.getElementsByClassName('item selected')[0]
 
