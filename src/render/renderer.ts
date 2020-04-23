@@ -49,11 +49,27 @@ searchBar.addEventListener('keyup', e => {
     })
 })
 
+//dblclick listener for opening a new window to show content
+itemsContainer.addEventListener('dblclick', ItemHandler.handleItemDblClick)
+
+// single click selection handler
 itemsContainer.addEventListener('click', ItemHandler.handleItemClick)
 
+// up & down arrow key navigation for items
 document.addEventListener('keydown', e => {
+    
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         ItemHandler.selectItem(e.key)
+        return;
+    }
+
+    //trigger the double click event if pressed enter on the container
+    if (e.key === 'Enter') {
+        itemsContainer.dispatchEvent(new MouseEvent('dblclick', {
+            bubbles: true,
+            cancelable: true,
+            view: window
+        }))
     }
 })
 

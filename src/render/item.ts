@@ -53,6 +53,8 @@ export function getItemHTML (item:Item) : HTMLElement{
 
     itemHtmlNode.classList.add('item')
 
+    itemHtmlNode.setAttribute('data-url', item.url)
+
     itemHtmlNode.innerHTML = `<img src="${item.screenshot}" class="pointer-none"><h3 class="pointer-none">${item.title}</h3>`
 
     return itemHtmlNode;
@@ -91,4 +93,15 @@ export function selectItem (direction: string) {
         currentItem.nextSibling.classList.add('selected');
     }
 
+}
+
+export function handleItemDblClick(e: MouseEvent) {
+    
+    const selectedItem: HTMLDivElement = <HTMLDivElement> document.getElementsByClassName('item selected')[0]
+
+    open(selectedItem.dataset.url);
+}
+
+function open(url:string) {
+    console.log(url)
 }
