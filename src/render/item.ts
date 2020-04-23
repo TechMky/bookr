@@ -16,7 +16,10 @@ export async function fetchItem (itemUrl: string): Promise<Item>{
         }
     })
 
-    await offScreenWindow.loadURL(itemUrl);
+    await offScreenWindow.loadURL(itemUrl).catch((err: Error) => {
+        dialog.showErrorBox('Error', err.message);
+        return null;
+    });
 
     const screenshot: NativeImage = await offScreenWindow.capturePage();
 

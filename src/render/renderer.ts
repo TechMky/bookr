@@ -91,11 +91,14 @@ addItemButton.addEventListener('click', e => {
 
 ipcRenderer.on('new-item-success', (e: Electron.IpcRendererEvent, item: Item) => {
     
+    //enable the button even undefined
+    toggleAddItemButton()
+
+    if (item == undefined) return;
     
     ItemHandler.addItem(item, itemsContainer, true);
 
     closeModal.click();
-    //enable the button
-    toggleAddItemButton()
+    
     inputUrl.value = "";
 })
