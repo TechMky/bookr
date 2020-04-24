@@ -1,4 +1,4 @@
-import { BrowserWindow, NativeImage, dialog } from "electron";
+import { BrowserWindow, NativeImage, dialog, shell } from "electron";
 import { Item } from "./item.interface";
 let offScreenWindow: BrowserWindow = null;
 const STORED_ITEMS_KEY: string = 'stored-items'
@@ -102,6 +102,11 @@ export function handleItemDblClick(e: MouseEvent) {
     open(selectedItem.dataset.url);
 }
 
-function open(url:string) {
-    console.log(url)
+/**
+ * Open a URL into OS default browser
+ * @param url string
+ */
+export function open(url:string) {
+
+    shell.openExternal(url)
 }
