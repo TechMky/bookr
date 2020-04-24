@@ -81,6 +81,7 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "electron-window-state": "^5.0.3"
+    "electron-window-state": "^5.0.3",
+    "is-valid-http-url": "^1.0.3"
   }
 }

@@ -1,6 +1,8 @@
 import './index.css';
 import { ipcRenderer } from "electron";
+import { remote } from "electron";
 import { Item } from './item.interface';
+const isUrl = require("is-valid-http-url");
 const ItemHandler = require('./item')
 
 const showModal: HTMLElement = document.getElementById('show-modal');
@@ -93,11 +95,21 @@ inputUrl.addEventListener('keyup', e => {
 //adding an item
 addItemButton.addEventListener('click', e => {
     
-    //validate the input url
-    if (inputUrl.value.length === 0) {
-        //open a dialog here
+    let url: string = inputUrl.value
+    //return if value is empty
+    if ( url.length === 0) return;
+
+    //try to add http if not present
+    if (url.startsWith('http') == false) {
+        url = `https://${url}`
+    }
+
+    //finally validate if proper url
+    if (isUrl(url) === false) {
+        remote.dialog.showErrorBox('Error', "Please enter a valid URL");
         return;
     }
+
     //disable the button
     toggleAddItemButton()
 
