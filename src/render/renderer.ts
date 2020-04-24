@@ -113,7 +113,7 @@ addItemButton.addEventListener('click', e => {
     //disable the button
     toggleAddItemButton()
 
-    ipcRenderer.send('new-item', inputUrl.value);
+    ipcRenderer.send('new-item', url);
 
 })
 
