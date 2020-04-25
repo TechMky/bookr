@@ -67,6 +67,10 @@ document.addEventListener('keydown', e => {
 
     //trigger the double click event if pressed enter on the container
     if (e.key === 'Enter') {
+
+        //if modal is not closed then do not open the a new window to read item
+        if (modalWindow.style.display != 'none') return
+
         itemsContainer.dispatchEvent(new MouseEvent('dblclick', {
             bubbles: true,
             cancelable: true,
