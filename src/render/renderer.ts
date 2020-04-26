@@ -69,7 +69,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
 
         //if modal is not closed then do not open the a new window to read item
-        if (modalWindow.style.display != 'none') return
+        if (modalWindow.style.display === 'flex') return
 
         itemsContainer.dispatchEvent(new MouseEvent('dblclick', {
             bubbles: true,
