@@ -59,7 +59,13 @@ export function getItemHTML (item:Item) : HTMLElement{
 
     itemHtmlNode.setAttribute('data-url', item.url)
 
-    itemHtmlNode.innerHTML = `<img src="${item.screenshot}" class="pointer-none"><h3 class="pointer-none">${item.title}</h3>`
+    itemHtmlNode.innerHTML = `
+    <img src="${item.screenshot}" class="pointer-none">
+    <div class="item-info pointer-none">
+        <h3 class="pointer-none">${item.title}</h3>
+        <button class="delete"></button>
+    </div>
+    `
 
     return itemHtmlNode;
 }
