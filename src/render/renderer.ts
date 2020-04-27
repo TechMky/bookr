@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import { ipcRenderer } from "electron";
 import { remote } from "electron";
 import { Item } from './item.interface';

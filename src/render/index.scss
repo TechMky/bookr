@@ -1,6 +1,11 @@
+// Required for bootstrap
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 
 html, body {
   height: 100%;
+  background-color: var(--danger);
 }
 
 body {
