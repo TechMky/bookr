@@ -2,7 +2,7 @@
   "name": "bookr",
   "productName": "bookr",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A simple bookmarking desktop application",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -12,6 +12,10 @@
     "lint": "eslint --ext .ts ."
   },
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TechMky/bookr"
+  },
   "author": "Yashasvi Sinha",
   "license": "MIT",
   "config": {
