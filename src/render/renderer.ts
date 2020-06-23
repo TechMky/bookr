@@ -2,15 +2,18 @@ import './index.scss';
 import { ipcRenderer } from "electron";
 import { remote } from "electron";
 import { Item } from './item.interface';
+const $ = require('jquery');
+require('popper.js')
+require('bootstrap')
 const isUrl = require("is-valid-http-url");
-const ItemHandler = require('./item')
+import * as ItemHandler from "./item";
 
 const showModal: HTMLElement = document.getElementById('show-modal');
 const closeModal: HTMLButtonElement = <HTMLButtonElement>document.getElementById('close-modal');
 const modalWindow: HTMLElement = document.getElementById('modal');
 const inputUrl: HTMLInputElement = <HTMLInputElement>document.getElementById('url');
 const addItemButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('add-item');
-const itemsContainer: HTMLDivElement = <HTMLDivElement> document.getElementById('items');
+const itemsContainer: JQuery = $('#items');
 const searchBar: HTMLInputElement = <HTMLInputElement> document.getElementById('search');
 
 document.addEventListener('readystatechange', e => {
@@ -39,6 +42,7 @@ const toggleAddItemButton = () => {
 }
 
 searchBar.addEventListener('keyup', e => {
+    const length = $('div.item').length
     const searchQuery = searchBar.value;
     const itemsArray: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.item'))
 
@@ -52,10 +56,12 @@ searchBar.addEventListener('keyup', e => {
 })
 
 //dblclick listener for opening a new window to show content
-itemsContainer.addEventListener('dblclick', ItemHandler.handleItemDblClick)
+itemsContainer.on('dblclick', '.item', null, ItemHandler.handleItemDblClick)
 
-// single click selection handler
-itemsContainer.addEventListener('click', ItemHandler.handleItemClick)
+// // single click selection handler
+itemsContainer.on('click', '.item', ItemHandler.handleItemClick)
+
+itemsContainer.on('click', '.delete', ItemHandler.handleDeleteItemClick)
 
 // up & down arrow key navigation for items
 document.addEventListener('keydown', e => {
@@ -71,22 +77,22 @@ document.addEventListener('keydown', e => {
         //if modal is not closed then do not open the a new window to read item
         if (modalWindow.style.display === 'flex') return
 
-        itemsContainer.dispatchEvent(new MouseEvent('dblclick', {
-            bubbles: true,
-            cancelable: true,
-            view: window
-        }))
+        // itemsContainer.trigger(new MouseEvent('dblclick', {
+        //     bubbles: true,
+        //     cancelable: true,
+        //     view: window
+        // }))
     }
 })
 
 showModal.addEventListener('click', e => {
-    modalWindow.style.display = 'flex';
+    $(modalWindow).modal('show');
     inputUrl.value = "";
     inputUrl.focus();
 });
 
 closeModal.addEventListener('click', e => {
-    modalWindow.style.display = 'none';
+    $(modalWindow).modal('hide')
 })
 
 //keyboard enter press
