@@ -28,11 +28,13 @@ export async function fetchItem (itemUrl: string): Promise<Item>{
 
     const screenshot: NativeImage = await offScreenWindow.capturePage();
 
+    const creationDate = new Date()
     const item: Item = {
         url: itemUrl,
         screenshot: screenshot.toDataURL(),
         title: offScreenWindow.getTitle(),
-        id: new Date().getTime()
+        id: creationDate.getTime(),
+        createdOn: creationDate
     }
 
     offScreenWindow.close();
@@ -63,13 +65,12 @@ export function getItemHTML (item:Item) : string{
                 <img src="${item.screenshot}" class="card-img pl-1 img-fluid rounded-0" alt="...">
             </div>
             <div class="col-8 col-md-10">
-                <div class="card-body h-100">
+                <div class="card-body d-flex flex-column justify-content-between h-100">
                     <div class="d-flex justify-content-between align-items-start">
                         <h5 class="card-title">${item.title}</h5>
                         <button class="btn btn-primary btn-sm delete" data-id='${item.id}'>X</button>
                     </div>
-                    <p class="card-text d-none d-md-block">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text"><small class="text-muted">Added on ${item.createdOn.toLocaleString()}</small></p>
                 </div>
             </div>
         </div>
@@ -86,6 +87,7 @@ export function loadItems (container: JQuery){
         this.storedItems = []
     }
     this.storedItems.forEach((item: Item) => {
+        item.createdOn = new Date(item.createdOn)
         $(container).append(this.getItemHTML(item))
     })
 }

@@ -3,4 +3,5 @@ export interface Item {
     screenshot: string,
     title: string,
     id: number,
+    createdOn: Date
 }
