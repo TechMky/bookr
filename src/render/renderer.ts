@@ -5,6 +5,7 @@ import { Item } from './item.interface';
 const $ = require('jquery');
 require('popper.js')
 require('bootstrap')
+require('./menu')
 const isUrl = require("is-valid-http-url");
 import * as ItemHandler from "./item";
 
@@ -16,6 +17,10 @@ const addItemButton: HTMLButtonElement = <HTMLButtonElement>document.getElementB
 const itemsContainer: JQuery = $('#items');
 const searchBar: HTMLInputElement = <HTMLInputElement> document.getElementById('search');
 
+//these functions are used in menu items as keyboard shortcuts
+export function addNewItem() {
+    showModal.click()
+}
 document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
         ItemHandler.loadItems(itemsContainer);
@@ -75,13 +80,9 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
 
         //if modal is not closed then do not open the a new window to read item
-        if (modalWindow.style.display === 'flex') return
+        if (modalWindow.classList.contains('show') == true) return
 
-        // itemsContainer.trigger(new MouseEvent('dblclick', {
-        //     bubbles: true,
-        //     cancelable: true,
-        //     view: window
-        // }))
+        $(itemsContainer).find('.selected').trigger('dblclick')
     }
 })
 
