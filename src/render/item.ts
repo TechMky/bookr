@@ -104,7 +104,14 @@ export function handleItemClick (e: JQuery.Event) {
 
 export function selectItem (direction: string) {
 
-    const currentItem: JQuery = $('.item.selected')
+    let currentItem: JQuery = $('.item.selected')
+
+    //if no item is selected then we select the first item if available
+    if (currentItem.length === 0) {
+        const firstItem: JQuery = $('.item:first')
+        firstItem.addClass('selected')
+        currentItem = firstItem
+    }
 
     if (direction === 'ArrowUp' && currentItem.prev('.item').length > 0 ) {
         currentItem.removeClass('selected')
