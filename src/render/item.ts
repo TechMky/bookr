@@ -124,7 +124,7 @@ export function selectItem (direction: string) {
 }
 
 export function handleItemDblClick(e: JQuery.Event) {
-    
+    e.stopPropagation()
     const url: string = $(this).data('url');
 
     open(url);
