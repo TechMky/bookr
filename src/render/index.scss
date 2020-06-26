@@ -1,6 +1,7 @@
+// overriding bootstrap blue color to match logo
+$blue: #ed1b25;
 // Required for bootstrap
 @import "~bootstrap";
-
 html, body {
   height: 100%;
   margin: 0;
@@ -29,7 +30,7 @@ header{
 }
 
 .item.selected{
-  border-color: dodgerblue;
+  border-color: $blue;
 }
 
 
