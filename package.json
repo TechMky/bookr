@@ -1,6 +1,6 @@
 {
   "name": "bookr",
-  "productName": "bookr",
+  "productName": "Bookr",
   "version": "1.0.0",
   "description": "A simple bookmarking desktop application",
   "main": ".webpack/main",
@@ -28,6 +28,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.50",
     "@electron-forge/maker-zip": "^6.0.0-beta.50",
     "@electron-forge/plugin-webpack": "^6.0.0-beta.50",
+    "@electron-forge/publisher-github": "^6.0.0-beta.50",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "@types/jquery": "^3.5.0",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
@@ -51,6 +52,7 @@
     "electron-window-state": "^5.0.3",
     "is-valid-http-url": "^1.0.3",
     "jquery": "^3.5.0",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "update-electron-app": "^1.5.0"
   }
 }

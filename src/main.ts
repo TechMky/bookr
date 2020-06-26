@@ -2,6 +2,9 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import { Item } from './render/item.interface';
 import { fetchItem } from './render/item';
 
+//this is for auto updates
+require('update-electron-app')()
+
 const windowStateKeeper = require('electron-window-state');
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
