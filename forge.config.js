@@ -3,7 +3,9 @@ const path = require('path')
 const iconDir = path.resolve(__dirname, 'src', 'images')
 
 const config = {
-    "packagerConfig": {},
+    "packagerConfig": {
+        "icon": path.resolve(iconDir, 'icon.icns')
+    },
     "makers": [
         {
             "name": "@electron-forge/maker-squirrel",
