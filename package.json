@@ -1,7 +1,7 @@
 {
   "name": "bookr",
   "productName": "Bookr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple bookmarking desktop application",
   "main": ".webpack/main",
   "scripts": {
