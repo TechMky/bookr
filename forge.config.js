@@ -1,3 +1,7 @@
+const path = require('path')
+
+const iconDir = path.resolve(__dirname, 'src', 'images')
+
 const config = {
     "packagerConfig": {},
     "makers": [
@@ -8,14 +12,11 @@ const config = {
                 return {
                     name: 'bookr',
                     authors: 'Yashasvi Sinha',
-                    // exe: 'electron-fiddle.exe',
-                    // iconUrl: 'https://raw.githubusercontent.com/electron/fiddle/0119f0ce697f5ff7dec4fe51f17620c78cfd488b/assets/icons/fiddle.ico',
-                    // loadingGif: './assets/loading.gif',
+                    iconUrl: path.resolve(iconDir, 'icon.ico'),
+                    setupIcon: path.resolve(iconDir, 'icon.ico'),
                     noMsi: true,
                     remoteReleases: '',
-                    // setupExe: `electron-fiddle-${version}-${arch}-setup.exe`,
-                    // setupIcon: path.resolve(iconDir, 'fiddle.ico'),
-                    certificatePassword: "525245", //process.env.WINDOWS_CERTIFICATE_PASSWORD,
+                    certificatePassword: process.env.WINDOWS_CERTIFICATE_PASSWORD,
                     certificateFile: "./private/bookr-certificate.pfx"
                 }
             }
